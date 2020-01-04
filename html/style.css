@@ -1,0 +1,22 @@
+P, TD { font-family:Tahoma,Arial,Helvetica; margin-top:6pt; margin-bottom:6pt;}
+H1 { font-family:Tahoma,Arial,Helvetica; text-align:center; margin:6pt 6pt 6pt 6pt; }
+H2 { font-size:130%; font-family:Tahoma,Arial,Helvetica; background-color:#30055C; color:white; padding-left: 5; padding-bottom: 2; margin-top:6pt; margin-bottom:6pt;}
+H3 { font-family:Tahoma,Arial,Helvetica; background-color:#807090; color:white; padding-left: 5;  padding-bottom: 2; margin-top:6pt; margin-bottom:6pt;}
+H4, H5, H6 { font-family:Tahoma,Arial,Helvetica; }
+BODY { margin-left:30px; margin-right:30px; font-family:Tahoma,Arial,Helvetica; }
+TT { font-size:110%; font-weight:900; white-space:nowrap; }
+PRE { font-size:90%; margin-top:4px; }
+TABLE { border-collapse:collapse; }
+TD, TH { padding-right:1em; text-align:left;}
+A:link, A:visited, A:active { color:#30055c; /*text-decoration: none;*/  }
+.file { background-color:f0f0f0; border:1px solid black; padding:6px;  }
+.shortdesc {font-size: 120%; font-family:Times,Times Roman,serif; font-style:italic; }
+.note { background-color:yellow; padding:4px; }
+.uml { background-color:ffffe0; border:1px solid black; padding:3px; font-family:monospace; } 
+.frame { background-color:f0f0f0; border:1px solid black; padding:2px; font-family:monospace; } 
+.math { font-family:Times,Times Roman,serif; font-style:italic; font-weight:bold; white-space:nowrap; font-size:110%; }
+.box { border:1px solid black; padding:3px; padding-left:8px; padding-right:8px; }
+.math sub { font-style:normal; font-weight:normal; }
+.math .norm { font-style:normal; font-weight:normal; }
+.math .big { font-style:normal; font-weight:normal; font-size:150%; }
+.sans { font-family:Tahoma,Arial,Helvetica,sans-serif,sans; }
