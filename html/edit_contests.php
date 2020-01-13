@@ -6,11 +6,10 @@ include "header.php";
 
 if (isset($_POST['submit'])) {
     if ($_GET['id']==="") {
-        $contest = query_one("INSERT INTO contests (id,name,path,live,start_time,freeze_time,stop_time,languages) 
-			VALUES (default,?,?,?,?,?,?,?) RETURNING id",
-            array($_POST['name'],$_POST['path'],$_POST['live']?'t':'f',$_POST['start_time'],
-			$_POST['freeze_time'],$_POST['stop_time'],$_POST['languages']));
-        $_GET['id'] = $contest->id;
+        $_GET['id'] = query_insert("INSERT INTO contests (id,name,path,live,start_time,freeze_time,stop_time,languages) 
+			VALUES (default,?,?,?,?,?,?,?)",
+            [$_POST['name'],$_POST['path'],$_POST['live']?'t':'f',$_POST['start_time'],
+			$_POST['freeze_time'],$_POST['stop_time'],$_POST['languages']]);
     }
     else {
         query_or_die("UPDATE contests SET name=?,path=?,live=?,start_time=?,
@@ -47,7 +46,6 @@ $ids = query_many("SELECT id FROM contests ORDER BY id",array());
 
 <form action=edit_contests.php?id=<?=@$_GET['id']?> method=post>
 <table class=form>
-    <tr><th>ID:          </th><td><input type=text size=80 name=id          value='<?=@$_POST['id']?>'          ></td></tr>
     <tr><th>Name:        </th><td><input type=text size=80 name=name        value='<?=@$_POST['name']?>'        ></td></tr>
     <tr><th>Path:        </th><td><input type=text size=80 name=path        value='<?=@$_POST['path']?>'        ></td></tr>
     <tr><th>Live:        </th><td><input type=checkbox     name=live 	    value=1 <?=@$_POST['live']?'checked':''?>></td></tr>

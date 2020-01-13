@@ -6,9 +6,8 @@ include "header.php";
 
 if (isset($_POST['submit'])) {
     if ($_GET['id']==="") {
-        $contestant = query_one("INSERT INTO contestants (name,password,judge) VALUES (?,?,?) RETURNING id",
+        $_GET['id'] = query_insert("INSERT INTO contestants (name,password,judge) VALUES (?,?,?)",
             [$_POST['name'],$_POST['password'],isset($_POST['judge'])?'t':'f']);
-        $_GET['id'] = $contestant->id;
     }
     else {
         query_or_die("UPDATE contestants SET name=?, password=?, judge=? WHERE id=?",
@@ -43,7 +42,6 @@ $ids = query_many("SELECT id FROM contestants ORDER BY id",array());
 
 <form action=edit_contestants.php?id=<?=@$_GET['id']?> method=post>
 <table class=form>
-    <tr><th>ID:                </th><td><input type=text size=80 name=id        value='<?=@$_POST['id']?>'       ></td></tr>
     <tr><th>Name:              </th><td><input type=text size=80 name=name      value='<?=@$_POST['name']?>'     ></td></tr>
     <tr><th>Password:          </th><td><input type=text size=80 name=password  value='<?=@$_POST['password']?>' ></td></tr>
     <tr><th>Judge:             </th><td><input type=checkbox name=judge value=1 <?=@$_POST['judge']?"checked":""?>></td></tr>

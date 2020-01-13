@@ -58,6 +58,12 @@ function query_one($query,$params=[]) {
 	return (object)$row;
 }
 
+function query_insert($query,$params=[]) {
+	global $db;
+	query_or_die($query,$params);
+	return $db->lastInsertRowID();
+}
+
 function format_time($time) {
     if ($time == '')
         return '';

@@ -6,13 +6,10 @@ include "header.php";
 
 if (isset($_POST['submit'])) {
     if ($_GET['id']==="") {
-		$problem = query_one("INSERT INTO problems (contest,number,name) VALUES (?,?,?) RETURNING id",
-            array($_POST['contest'],$_POST['number'],$_POST['name']));
-        $_GET['id'] = $problem->id;
+		$_GET['id'] = query_insert("INSERT INTO problems (contest,number,name) VALUES (?,?,?)",[$_POST['contest'],$_POST['number'],$_POST['name']]);
     }
     else {
-        query_or_die("UPDATE problems SET contest=?, name=? WHERE id=?",
-            array($_POST['contest'],$_POST['name'],$_GET['id'])); 
+        query_or_die("UPDATE problems SET contest=?, name=? WHERE id=?",[$_POST['contest'],$_POST['name'],$_GET['id']]); 
     }
 }
 else if (isset($_POST['delete']) && !empty($_GET['id'])) {

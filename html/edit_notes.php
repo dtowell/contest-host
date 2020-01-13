@@ -6,9 +6,8 @@ include "header.php";
 
 if (isset($_POST['submit'])) {
     if ($_GET['id']==="") {
-        $note = query_one("INSERT INTO notes (contest,id,problem,note) VALUES (?,default,(SELECT id FROM problems WHERE number=? AND contest=?),?) RETURNING id",
+        $_GET['id'] = query_insert("INSERT INTO notes (contest,problem,note) VALUES (?,(SELECT id FROM problems WHERE number=? AND contest=?),?)",
             [$_POST['contest'],(empty($_POST['number'])?null:$_POST['number']),$_POST['contest'],$_POST['note']]);
-        $_GET['id'] = $note->id;
     }
     else {
         query_or_die("UPDATE notes SET contest=?, problem=(SELECT id FROM problems WHERE number=? AND contest=?), note=? WHERE id=?",
@@ -41,7 +40,6 @@ $contests = query_many("SELECT id,name FROM contests ORDER BY id",array());
 <form action=edit_notes.php?id=<?=@$_GET['id']?> method=post>
 <table class=form>
     <tr><th>Contest:  </th><td><?=gen_select('contest',$contests,@$_POST['contest'])?></td></tr>
-    <tr><th>ID:       </th><td><input type=text size=80 name=id        value='<?=@$_POST['id']?>'     ></td></tr>
     <tr><th>Problem:  </th><td><input type=text size=80 name=number   value='<?=@$_POST['number']?>' ></td></tr>
     <tr><th>Message:  </th><td><textarea rows=15 cols=80 name=note><?=@$_POST['note']?></textarea></td></tr>
     <tr><th>          </th><td><input type=submit name=submit value=Submit> <input type=submit name=delete value=Delete></td></tr>
