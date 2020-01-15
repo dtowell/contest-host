@@ -6,7 +6,7 @@ $page_title = "Submissions";
 include "header.php";
 
 $attempts = query_many("SELECT attempts.id,(SELECT name from contestants WHERE id=contestant) AS contestant,problem,number,language,result,
-			strftime('%s',time) AS unixtime, problems.name
+			strftime('%s',time) AS time, problems.name
         FROM attempts 
 		LEFT JOIN problems ON problem=problems.id 
 		" //WHERE NOT language='txt' 
@@ -17,8 +17,8 @@ $attempts = query_many("SELECT attempts.id,(SELECT name from contestants WHERE i
 <tr class=line><th>Time</th><th>Minutes</th><th>Num</th><th>Name</th><th>Contestant</th><th>Language</th><th>Result</th></tr>
 <?php foreach ($attempts as $a) : ?>
     <tr>
-    <td><?=format_time($a->unixtime)?></td>
-    <td><?=format_minutes($a->unixtime)?></td>
+    <td><?=format_time($a->time)?></td>
+    <td><?=format_minutes($a->time)?></td>
     <td><?=$a->number?></td>
     <td><a href='view_file.php?file=<?=$a->number?>.html'><?=$a->name?></a></td>
     <td><?=$a->contestant?></td>

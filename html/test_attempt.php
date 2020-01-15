@@ -44,7 +44,7 @@ function execute($cwd,$program,$stdin,&$stdout,&$stderr) {
 }
 
 $attempt = query_one("SELECT problem,c.name AS contestant,language,code,filename,
-			extract(epoch from time) AS unixtime,p.number,p.name,savepath,contests.path
+			time,p.number,p.name,savepath,contests.path
         FROM attempts 
 		LEFT JOIN problems p ON problem=p.id
 		LEFT JOIN contestants c ON contestant=c.id
@@ -56,7 +56,7 @@ $attempt = query_one("SELECT problem,c.name AS contestant,language,code,filename
 <table class=form>
 <tr><th>Number:      </th><td><?=$attempt->number?></td></tr>
 <tr><th>Name:        </th><td><?=$attempt->name?></td></tr>
-<tr><th>Submit time: </th><td><?=format_time($attempt->unixtime)?></td></tr>
+<tr><th>Submit time: </th><td><?=format_time($attempt->time)?></td></tr>
 <tr><th>Contestant:  </th><td><?=$attempt->contestant?></td></tr>
 <tr><th>Language:    </th><td><?=$attempt->language?></td></tr>
 <tr><th>Filename:    </th><td><?=$attempt->filename?></td></tr>

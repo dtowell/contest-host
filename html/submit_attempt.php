@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$attempts = query_many("SELECT result,language, extract(epoch from time) AS unixtime FROM attempts
+$attempts = query_many("SELECT result,language, time FROM attempts
         WHERE problem=? AND contestant=? ORDER BY time",array($_GET['id'],$_SESSION['user_id']));
 
 $notes = query_many("SELECT note FROM notes WHERE problem=?",array($_GET['id']));
@@ -91,8 +91,8 @@ $extentions = array(
 <tr class=line><th>Time</th><th>Minutes</th><th>Language</th><th>Result</th></tr>
 <?php foreach ($attempts as $a): ?>
     <tr>
-    <td><?=format_time($a->unixtime)?></td>
-    <td><?=format_minutes($a->unixtime)?></td>
+    <td><?=format_time($a->time)?></td>
+    <td><?=format_minutes($a->time)?></td>
     <td><?=$a->language?></td>
     <td><?=$a->result?></td>
     </tr>
