@@ -32,14 +32,16 @@ if (isset($_POST['submit'])) {
 	   $error_msg .= "Filename contains a space.<br>"; 
 
     if ($error_msg == "") {
-        $file_path = "/var/www/contests/workdir/{$problem->number}_$_SESSION[username]_$problem->count.$_POST[language]"; 
+        $file_path = "../contests/workdir/{$problem->number}_$_SESSION[username]_$problem->count.$_POST[language]"; 
+        //error_log("cwd=".getcwd());
+        //error_log("file_path=$file_path");
         if (!move_uploaded_file($_FILES['file']['tmp_name'],$file_path))
     	   $error_msg .= "File could not be moved after uploading.<br>\n".print_r($_FILES,true)."\n$file_path <br>\n";;
     }
     
     if ($error_msg == "") {
         query_or_die("INSERT INTO attempts (contestant,problem,time,code,savepath,filename,language,result) 
-			VALUES (?,?,?.?,?,?,?,'submitted')",
+			VALUES (?,?,?,?,?,?,?,'submitted')",
             array($_SESSION['user_id'],$_GET['id'],date("Y-m-d H:i:s",$current_time),
 			file_get_contents($file_path),$file_path,$_FILES["file"]["name"],$_POST['language']));
         redirect("view_problems.php");

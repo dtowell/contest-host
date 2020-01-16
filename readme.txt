@@ -7,7 +7,7 @@ Installation
 
 Startup
 -------
-1. start server by running: php -S 0.0.0.0:8000 -t html
+1. start server by running: php -S 0.0.0.0:8000 -t html html/redirect.php
 2. open browser to localhost:8000
 
 Add Contest

@@ -68,7 +68,7 @@ $attempt = query_one("SELECT problem,c.name AS contestant,language,code,filename
 
 flush();
 
-$work_path = "/var/www/contests/workdir/$_GET[id]";
+$work_path = "../contests/workdir/$_GET[id]";
 mkdir($work_path);
 file_put_contents("$work_path/$attempt->filename",$attempt->code);
 
