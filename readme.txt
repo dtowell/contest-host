@@ -24,3 +24,9 @@ Usage
 * contestants have limited rights
 * questions and print requests supported via submissions (see submit_attempt.php)
 * support for print requests via view_prints.php
+
+Coverage
+--------
+* install php-xdebug
+* run: php -S 0.0.0.0:8000 -t html -dauto_prepend_file=coverage.php html/redirect.php
+* later, run: php show_coverage.php
