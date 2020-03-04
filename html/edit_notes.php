@@ -14,8 +14,8 @@ if (isset($_POST['submit'])) {
             [$_POST['contest'],(empty($_POST['number'])?null:$_POST['number']),$_POST['contest'],$_POST['note'],$_POST['id']]);
     }
 }
-else if (isset($_POST['delete']) && !empty($_POST['id'])) {
-    query_or_die("DELETE FROM notes WHERE id=?",array($_POST['id']));
+else if (isset($_POST['delete']) && !empty($_GET['id'])) {
+    query_or_die("DELETE FROM notes WHERE id=?",array($_GET['id']));
     redirect("edit_notes.php");
 }
 
