@@ -7,11 +7,11 @@ include "header.php";
 if (isset($_POST['submit'])) {
     if ($_GET['id']==="") {
         $_GET['id'] = query_insert("INSERT INTO contestants (name,password,judge) VALUES (?,?,?)",
-            [$_POST['name'],$_POST['password'],isset($_POST['judge'])?'t':'f']);
+            [$_POST['name'],$_POST['password'],(int)isset($_POST['judge'])]);
     }
     else {
         query_or_die("UPDATE contestants SET name=?, password=?, judge=? WHERE id=?",
-            [$_POST['name'],$_POST['password'],isset($_POST['judge'])?'t':'f',$_POST['id']]);
+            [$_POST['name'],$_POST['password'],(int)isset($_POST['judge']),$_GET['id']]);
     }
 }
 else if (isset($_POST['delete']) && !empty($_GET['id'])) {
@@ -27,7 +27,6 @@ if (!empty($_GET['id'])) {
     $contestant = query_one("SELECT * FROM contestants WHERE id=?",[$_GET['id']]);
     foreach ($contestant as $k=>$v)
         $_POST[$k]=$v;
-    $_POST['judge'] = $_POST['judge']=='t';
 }
 
 $ids = query_many("SELECT id FROM contestants ORDER BY id",array());
