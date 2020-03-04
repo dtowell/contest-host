@@ -28,5 +28,5 @@ Usage
 Coverage
 --------
 * install php-xdebug
-* run: php -S 0.0.0.0:8000 -t html -dauto_prepend_file=coverage.php html/redirect.php
+* run: php -S 0.0.0.0:8000 -t html -dauto_prepend_file=html/coverage.php html/redirect.php
 * later, run: php show_coverage.php
